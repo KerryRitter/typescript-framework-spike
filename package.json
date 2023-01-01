@@ -1,4 +1,5 @@
 {
+  "name": "typescript-framework-spike",
   "private": true,
   "sideEffects": false,
   "scripts": {

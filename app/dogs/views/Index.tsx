@@ -2,35 +2,20 @@ import { useLoaderData } from '@remix-run/react';
 import type { DogsController } from '../dogs.controller';
 
 export default function Index() {
-  const loaderData = useLoaderData<ReturnType<DogsController['indexApi']>>()
+  const { dogs } = useLoaderData<ReturnType<DogsController['indexView']>>()
 
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.4" }}>
-      <h1>Welcome to Remix</h1>
+    <div>
+      <h1>Welcome to dogs</h1>
+
       <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
+        {dogs.map(dog => {
+          return <li key={dog.id}>
+            <a href={`/dogs/${dog.id}`}>
+              {dog.name}
+            </a>
+          </li>
+        })}
       </ul>
     </div>
   );
