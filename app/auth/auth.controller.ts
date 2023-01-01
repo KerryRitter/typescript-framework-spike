@@ -13,7 +13,7 @@ export class AuthController extends CoreAuthController {
    * Override ViewBackend logic like this
    */
   @ViewBackend.Get('login')
-  loginView() {
+  loginViewBackend() {
     return {};
   }
 
