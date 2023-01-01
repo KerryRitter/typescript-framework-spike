@@ -3,7 +3,7 @@ import { useApiClient } from '~/core';
 import type { DogsController } from '../dogs.controller';
 
 export default function Details() {
-  const { dog } = useLoaderData<ReturnType<DogsController['detailsView']>>()
+  const { dog } = useLoaderData<ReturnType<DogsController['detailsViewBackend']>>()
 
   /**
    * The framework generates this hook with API definitions correlating to all APIs

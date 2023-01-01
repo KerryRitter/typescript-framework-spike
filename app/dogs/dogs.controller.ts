@@ -1,15 +1,26 @@
 import { Api, Body, Controller, Inject, Param, ParseIntPipe, View, ViewBackend } from '~/core';
-import type { Dog, DogService } from './dogs.service';
+import type { Dog, DogsService } from './dogs.service';
 import Details from './views/Details';
 import Index from './views/Index';
 
 @Controller('dogs')
 export class DogsController {
-  @View('') readonly index = Index;
-  @View('details') readonly details = Details;
+  @View('', {
+    meta: () => ({
+      title: "Dogs",
+    })
+  })
+  readonly index = Index;
+
+  @View('details', {
+    meta: (data: ReturnType<DogsController['detailsViewBackend']>) => ({
+      title: data.dog.name,
+    })
+  })
+  readonly details = Details;
 
   constructor(
-    @Inject() private readonly dogService: DogService,
+    @Inject() private readonly dogsService: DogsService,
   ) { }
 
   /**
@@ -18,7 +29,7 @@ export class DogsController {
    */
   @Api.Post('')
   createDog() {
-    return this.dogService.getDogs();
+    return this.dogsService.getDogs();
   }
 
   /**
@@ -30,7 +41,7 @@ export class DogsController {
     @Param('id', ParseIntPipe) id: number,
     @Body() updatedDog: Dog,
   ) {
-    return this.dogService.updateDog(updatedDog);
+    return this.dogsService.updateDog(updatedDog);
   }
 
   /**
@@ -38,9 +49,9 @@ export class DogsController {
    * using Remix's useLoaderData.
    */
   @ViewBackend.Get('index')
-  indexView() {
+  indexViewBackend() {
     return {
-      dogs: this.dogService.getDogs()
+      dogs: this.dogsService.getDogs()
     };
   }
 
@@ -49,9 +60,9 @@ export class DogsController {
    * using Remix's useLoaderData.
    */
   @ViewBackend.Get('details/$id')
-  detailsView(@Param('id', ParseIntPipe) id: number) {
+  detailsViewBackend(@Param('id', ParseIntPipe) id: number) {
     return {
-      dog: this.dogService.getDog(id)
+      dog: this.dogsService.getDog(id)
     };
   }
 }

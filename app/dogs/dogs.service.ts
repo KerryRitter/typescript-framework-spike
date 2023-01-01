@@ -7,7 +7,7 @@ export type Dog = {
 }
 
 @Injectable()
-export class DogService {
+export class DogsService {
   getDogs(): Dog[] {
     return [{ id: 1, name: 'Socket', about: 'A very nice dog' }]
   }

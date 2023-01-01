@@ -17,6 +17,7 @@ const dummyPropertyDecorator = (...params: any[]) => {
 
 export const View = dummyPropertyDecorator;
 
+export const Module = dummyClassDecorator;
 export const Controller = dummyClassDecorator;
 export const Injectable = dummyClassDecorator;
 
@@ -41,5 +42,11 @@ export const ViewBackend = {
 }
 
 export class ParseIntPipe { }
+export class CoreAuthModule {
+  static register(...params: any[]) { }
+}
+export class CoreAuthController {
+  readonly login = null as any as () => JSX.Element;
+}
 
 export const useApiClient = () => { return null as any }

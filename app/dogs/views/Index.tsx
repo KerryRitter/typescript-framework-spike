@@ -2,7 +2,7 @@ import { useLoaderData } from '@remix-run/react';
 import type { DogsController } from '../dogs.controller';
 
 export default function Index() {
-  const { dogs } = useLoaderData<ReturnType<DogsController['indexView']>>()
+  const { dogs } = useLoaderData<ReturnType<DogsController['indexViewBackend']>>()
 
   return (
     <div>
